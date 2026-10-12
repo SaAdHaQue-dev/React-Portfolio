@@ -1,26 +1,31 @@
+import { navLinks } from '../../data/navLinks'
+import Button from '../ui/Button'
+
 export default function Navbar() {
   return (
-    <header className="mx-auto flex w-full max-w-[1200px] items-center justify-between px-[22px] py-5 min-[601px]:px-8 min-[601px]:py-6">
-      <a
-        className="inline-flex items-center gap-2 font-[Arial,sans-serif] text-sm font-extrabold tracking-[-0.04em] text-[#171715] no-underline"
-        href="#top"
-        aria-label="Saad home"
-      >
-        <span className="size-[10px] rounded-full bg-current" aria-hidden="true" />
-        <span>SAAD</span>
-      </a>
+    <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur-md">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+        <a href="#top" className="flex items-center gap-3">
+          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[#0d1b3d] text-sm font-bold text-[#d2a24c]">
+            D
+          </div>
+          <div>
+            <div className="text-lg font-black uppercase tracking-[0.12em] text-[#0d1b3d]">DPS Junior School</div>
+          </div>
+        </a>
 
-      <button
-        className="inline-flex min-h-[42px] min-w-[102px] cursor-pointer items-center justify-center gap-[14px] rounded-full border-0 bg-[#171715] px-[14px] text-[9px] font-bold tracking-[0.02em] text-[#f1f0e9]"
-        type="button"
-        aria-label="Open menu"
-      >
-        <span>MENU</span>
-        <span className="flex w-[13px] flex-col gap-[3px]" aria-hidden="true">
-          <span className="h-px w-full bg-current" />
-          <span className="h-px w-full bg-current" />
-        </span>
-      </button>
+        <div className="hidden items-center gap-8 md:flex">
+          {navLinks.map((link) => (
+            <a key={link.label} href={link.href} className="text-sm font-medium text-slate-700 transition hover:text-[#0d1b3d]">
+              {link.label}
+            </a>
+          ))}
+        </div>
+
+        <Button href="#admissions" variant="primary" className="hidden md:inline-flex">
+          Apply Now
+        </Button>
+      </nav>
     </header>
   )
 }
