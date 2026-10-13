@@ -4,7 +4,13 @@ import { motion, useMotionValue, useSpring } from 'framer-motion'
 export default function CustomCursor() {
   const [cursorType, setCursorType] = useState('default') // 'default' | 'pointer' | 'view' | 'drag'
   const [isVisible, setIsVisible] = useState(false)
-  const [isTouch, setIsTouch] = useState(true)
+  const [isTouch] = useState(() => {
+    if (typeof window === 'undefined') return true
+    return (
+      window.matchMedia('(pointer: coarse)').matches ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    )
+  })
 
   const mouseX = useMotionValue(-100)
   const mouseY = useMotionValue(-100)
@@ -15,12 +21,7 @@ export default function CustomCursor() {
   const cursorY = useSpring(mouseY, springConfig)
 
   useEffect(() => {
-    // Disable on touch devices or reduced-motion
-    if (window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setIsTouch(true)
-      return
-    }
-    setIsTouch(false)
+    if (isTouch) return
 
     const handleMouseMove = (e) => {
       mouseX.set(e.clientX)
@@ -59,7 +60,7 @@ export default function CustomCursor() {
       document.removeEventListener('mouseenter', handleMouseEnter)
       document.removeEventListener('mouseover', handleOver)
     }
-  }, [isVisible, mouseX, mouseY])
+  }, [isTouch, isVisible, mouseX, mouseY])
 
   if (isTouch || !isVisible) return null
 

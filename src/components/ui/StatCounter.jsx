@@ -15,7 +15,6 @@ export default function StatCounter({ value, label }) {
   useEffect(() => {
     if (!isInView || targetNumber === 0) return
 
-    let start = 0
     const duration = 1600 // ms
     const startTime = performance.now()
 

@@ -3,14 +3,14 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { siteConfig } from '../../data/site'
 
 export default function Preloader({ onComplete }) {
+  const [isFinished, setIsFinished] = useState(() => {
+    if (typeof window === 'undefined') return true
+    return Boolean(sessionStorage.getItem('portfolio_preloader_seen'))
+  })
   const [percent, setPercent] = useState(0)
-  const [isFinished, setIsFinished] = useState(false)
 
   useEffect(() => {
-    // Check if seen this session
-    const hasSeen = sessionStorage.getItem('portfolio_preloader_seen')
-    if (hasSeen) {
-      setIsFinished(true)
+    if (isFinished) {
       onComplete?.()
       return
     }
@@ -37,7 +37,7 @@ export default function Preloader({ onComplete }) {
     }
 
     requestAnimationFrame(step)
-  }, [onComplete])
+  }, [isFinished, onComplete])
 
   return (
     <AnimatePresence>

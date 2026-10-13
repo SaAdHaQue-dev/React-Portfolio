@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { aboutData } from '../data/about'
-import { siteConfig } from '../data/site'
 import PillButton from '../components/ui/PillButton'
 import PageTransition from '../components/layout/PageTransition'
 import Reveal from '../components/ui/Reveal'
