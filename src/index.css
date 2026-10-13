@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  font-family: 'Inter', 'Segoe UI', sans-serif;
+  font-family: Arial, 'Segoe UI', sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  color: #0d1b3d;
-  background: #f7f2ea;
+  color: #171715;
+  background: #b9bab4;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -20,7 +20,7 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background: #f7f2ea;
+  background: #b9bab4;
 }
 
 img {
