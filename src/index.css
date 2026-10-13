@@ -1,11 +1,31 @@
 @import "tailwindcss";
 
+@theme {
+  --font-display: 'Bebas Neue', Impact, 'Arial Narrow', sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  --color-bg-outer: #BABCB5;
+  --color-bg-surface: #DCDDD8;
+  --color-ink: #1A1A1A;
+  --color-ink-muted: #6B6C68;
+  --color-line: #BDBFB8;
+  --color-accent: #E8622C;
+}
+
 :root {
-  font-family: Arial, 'Segoe UI', sans-serif;
+  --bg-outer: #BABCB5;
+  --bg-surface: #DCDDD8;
+  --ink: #1A1A1A;
+  --ink-muted: #6B6C68;
+  --line: #BDBFB8;
+  --accent: #E8622C;
+  
+  font-family: var(--font-sans);
   line-height: 1.5;
   font-weight: 400;
-  color: #171715;
-  background: #b9bab4;
+  color: #1A1A1A;
+  background-color: #BABCB5;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -13,26 +33,47 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto; /* Lenis handles smooth scrolling */
 }
 
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background: #b9bab4;
+  background-color: #BABCB5;
+  overflow-x: hidden;
 }
 
-img {
-  display: block;
-  max-width: 100%;
+/* Arch mask for hero and portraits */
+.mask-arch {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 9999px;
+  border-bottom-right-radius: 9999px;
 }
 
-a {
-  text-decoration: none;
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-* {
-  box-sizing: border-box;
+/* Custom cursor default pointer behavior */
+@media (hover: hover) and (pointer: fine) {
+  .cursor-interactive {
+    cursor: none;
+  }
 }
-   
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

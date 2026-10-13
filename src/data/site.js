@@ -1,0 +1,36 @@
+export const siteConfig = {
+  name: 'Saad',
+  title: 'Saad — UI/UX & Brand Designer',
+  role: 'UI/UX & Brand Designer',
+  headline: {
+    greeting: "Hey, I'm Saad,",
+    line1: "A UI/UX",
+    accent: "& Brand",
+    line2: "Designer",
+  },
+  tagline: "Transforming ideas into stunning visuals—UI/UX and brand design that captivates, engages, and delivers results.",
+  email: "hello@saadhaque.dev",
+  location: "New York, NY (UTC-4)",
+  status: "Available for new projects",
+  experienceYears: "15+",
+  projectsCount: "280+",
+  satisfactionRate: "99%",
+  clientsCount: "50+",
+  stats: [
+    { value: '15+', label: 'Years Experience' },
+    { value: '280+', label: 'Projects Delivered' },
+    { value: '99%', label: 'Client Satisfaction' },
+    { value: '50+', label: 'Clients Worldwide' },
+  ],
+  socials: [
+    { label: 'Twitter / X', href: 'https://twitter.com', username: '@saad_design' },
+    { label: 'LinkedIn', href: 'https://linkedin.com', username: 'saad-design' },
+    { label: 'Dribbble', href: 'https://dribbble.com', username: 'saad' },
+    { label: 'GitHub', href: 'https://github.com/SaAdHaQue-dev', username: 'SaAdHaQue-dev' },
+    { label: 'Instagram', href: 'https://instagram.com', username: '@saad.ux' },
+  ],
+  bio: {
+    lead: "Hey, I'm Saad, a UI/UX and brand designer passionate about creating visually compelling and user-friendly digital experiences.",
+    body: "With a keen eye for aesthetics and a deep understanding of user behavior, I design brands and interfaces that not only look great but also resonate with audiences. Whether it's building a brand identity from the ground up or refining a digital product for seamless usability, I blend strategy, creativity, and functionality to bring ideas to life. Let's collaborate and make something extraordinary.",
+  },
+}

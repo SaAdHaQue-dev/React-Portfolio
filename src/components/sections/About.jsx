@@ -1,31 +1,44 @@
+import { siteConfig } from '../../data/site'
+import PillButton from '../ui/PillButton'
+import Reveal from '../ui/Reveal'
+
 export default function About() {
   return (
     <section
-      aria-labelledby="about-title"
-      className="mx-auto grid w-full max-w-[1200px] grid-cols-1 gap-8 px-[22px] py-20 md:grid-cols-2 md:gap-12 md:px-8 md:py-32"
+      aria-labelledby="about-teaser-title"
+      className="mx-auto w-full max-w-[1240px] px-6 py-16 sm:px-8 md:py-24"
       id="about"
     >
-      <h2
-        className="max-w-[540px] font-[Impact,'Arial_Narrow',sans-serif] text-[clamp(2.75rem,5.5vw,5rem)] uppercase leading-[0.91] tracking-[-0.025em] text-[#171715]"
-        id="about-title"
-      >
-        Crafting meaningful brands &amp; intuitive experiences
-      </h2>
+      <Reveal>
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-14 items-start border-t border-[#BDBFB8] pt-12">
+          <div>
+            <span className="font-sans text-[11px] font-bold uppercase tracking-widest text-[#6B6C68]">
+              About Saad
+            </span>
+            <h2
+              className="mt-3 font-['Bebas_Neue',Impact,sans-serif] text-[clamp(2.8rem,5.5vw,5rem)] uppercase leading-[0.92] tracking-tight text-[#1A1A1A]"
+              id="about-teaser-title"
+            >
+              Crafting meaningful brands &amp; intuitive experiences
+            </h2>
+          </div>
 
-      <div className="max-w-[520px] md:justify-self-end">
-        <p className="font-[Georgia,serif] text-[clamp(1.25rem,2.2vw,1.75rem)] leading-[1.3] tracking-[-0.035em] text-[#33332e]">
-          Hey, I&apos;m Saad, a UI/UX and brand designer passionate about
-          creating visually compelling and user-friendly digital experiences.
-        </p>
-        <p className="mt-6 font-[Georgia,serif] text-[15px] leading-[1.55] text-[#77776f]">
-          With a keen eye for aesthetics and a deep understanding of user
-          behavior, I design brands and interfaces that not only look great but
-          also resonate with audiences. Whether it&apos;s building a brand identity
-          from the ground up or refining a digital product for seamless
-          usability, I blend strategy, creativity, and functionality to bring
-          ideas to life. Let&apos;s collaborate and make something extraordinary.
-        </p>
-      </div>
+          <div className="md:pt-6">
+            <p className="font-serif text-[clamp(1.2rem,2vw,1.6rem)] leading-[1.35] tracking-tight text-[#33332E]">
+              {siteConfig.bio.lead}
+            </p>
+            <p className="mt-5 font-serif text-base leading-[1.6] text-[#6B6C68]">
+              {siteConfig.bio.body}
+            </p>
+
+            <div className="mt-8">
+              <PillButton to="/about">
+                More About Me
+              </PillButton>
+            </div>
+          </div>
+        </div>
+      </Reveal>
     </section>
   )
 }

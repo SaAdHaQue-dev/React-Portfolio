@@ -1,5 +1,7 @@
 export const footerLinks = [
-  { label: 'About', href: '#about' },
-  { label: 'Portfolio', href: '#portfolio' },
-  { label: 'Email', href: 'mailto:hello@example.com' },
+  { label: 'Work', href: '/work' },
+  { label: 'About', href: '/about' },
+  { label: 'Services', href: '/services' },
+  { label: 'Journal', href: '/journal' },
+  { label: 'Contact', href: '/contact' },
 ]

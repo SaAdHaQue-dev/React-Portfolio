@@ -1,14 +1,30 @@
+import PillButton from '../ui/PillButton'
+import Reveal from '../ui/Reveal'
+
 export default function Contact() {
   return (
-    <section className="mx-auto flex w-full max-w-[1200px] flex-col gap-6 px-[22px] py-14 md:flex-row md:items-center md:justify-between md:px-8" id="contact">
-      <div>
-        <p className="mb-2 font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-[#77776f]">Have a project in mind?</p>
-        <h2 className="font-[Impact,'Arial_Narrow',sans-serif] text-4xl uppercase leading-none tracking-[-0.02em]">Let&apos;s make it meaningful.</h2>
-      </div>
-      <a className="inline-flex w-fit items-center gap-3 rounded-full bg-[#171715] py-1 pl-5 pr-1 font-sans text-[10px] font-bold uppercase tracking-wide text-[#f1f0e9] transition-transform hover:scale-[1.03]" href="mailto:hello@example.com">
-        Get in touch
-        <span className="grid size-9 place-items-center rounded-full bg-[#f1f0e9] text-[#171715]" aria-hidden="true">↗</span>
-      </a>
+    <section className="mx-auto w-full max-w-[1240px] px-6 py-16 sm:px-8 md:py-24" id="contact">
+      <Reveal>
+        <div className="rounded-[28px] border border-[#BDBFB8] bg-[#1A1A1A] p-8 sm:p-16 text-[#F1F0E9] shadow-md flex flex-col md:flex-row md:items-center justify-between gap-8">
+          <div>
+            <p className="font-sans text-[11px] font-bold uppercase tracking-[0.25em] text-[#E8622C]">
+              Have a visionary project in mind?
+            </p>
+            <h2 className="mt-2 font-['Bebas_Neue',Impact,sans-serif] text-[clamp(2.5rem,6vw,5.5rem)] leading-none uppercase tracking-tight text-white">
+              Let&apos;s make it unforgettable.
+            </h2>
+            <p className="mt-4 font-serif italic text-base sm:text-lg text-[#BDBFB8] max-w-[500px]">
+              Available for full design sprints, brand architecture, and embedded product partnerships.
+            </p>
+          </div>
+
+          <div className="shrink-0">
+            <PillButton to="/contact" variant="light" className="!px-7 !py-2 !text-xs">
+              Start Conversation
+            </PillButton>
+          </div>
+        </div>
+      </Reveal>
     </section>
   )
 }

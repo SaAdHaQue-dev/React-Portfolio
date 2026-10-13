@@ -1,60 +1,115 @@
-import StatItem from '../ui/StatItem'
-
-const stats = [
-  { value: '15+', label: 'Years Experience' },
-  { value: '280+', label: 'Projects Delivered' },
-  { value: '*99%', label: 'Client Satisfaction' },
-  { value: '50+', label: 'Clients Worldwide' },
-]
+import { useRef } from 'react'
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import { siteConfig } from '../../data/site'
+import StatCounter from '../ui/StatCounter'
+import PillButton from '../ui/PillButton'
 
 export default function Hero() {
+  const cardRef = useRef(null)
+
+  // Mouse Parallax for Portrait
+  const x = useMotionValue(0)
+  const y = useMotionValue(0)
+
+  const mouseX = useSpring(x, { stiffness: 120, damping: 20 })
+  const mouseY = useSpring(y, { stiffness: 120, damping: 20 })
+
+  const rotateX = useTransform(mouseY, [-0.5, 0.5], [6, -6])
+  const rotateY = useTransform(mouseX, [-0.5, 0.5], [-6, 6])
+
+  const handleMouseMove = (e) => {
+    if (!cardRef.current) return
+    const rect = cardRef.current.getBoundingClientRect()
+    const width = rect.width
+    const height = rect.height
+    const mouseXPos = e.clientX - rect.left
+    const mouseYPos = e.clientY - rect.top
+    const xPct = mouseXPos / width - 0.5
+    const yPct = mouseYPos / height - 0.5
+    x.set(xPct)
+    y.set(yPct)
+  }
+
+  const handleMouseLeave = () => {
+    x.set(0)
+    y.set(0)
+  }
+
   return (
     <section
       aria-labelledby="hero-title"
-      className="mx-auto grid w-full max-w-[1200px] grid-cols-1 items-center gap-8 px-[22px] pb-12 pt-8 md:grid-cols-[minmax(0,0.95fr)_minmax(0,1.3fr)_minmax(110px,0.48fr)] md:gap-7 md:px-8 md:pb-16 md:pt-4"
+      className="mx-auto grid w-full max-w-[1240px] grid-cols-1 items-center gap-10 px-6 pb-16 pt-8 sm:px-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)_minmax(120px,0.55fr)] md:gap-8 md:pb-20 md:pt-8"
     >
-      <div className="order-1 max-w-[360px]">
-        <p className="mb-2 font-[Georgia,serif] text-xl tracking-[-0.06em] text-[#34342f] md:text-[22px]">
-          Hey, I&apos;m Saad,
+      {/* Left Column: Headline and CTA */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        className="order-1 max-w-[390px]"
+      >
+        <p className="mb-2 font-serif text-xl sm:text-2xl tracking-tight text-[#34342F]">
+          {siteConfig.headline.greeting}
         </p>
+
         <h1
-          className="font-[Impact,'Arial_Narrow',sans-serif] text-[clamp(3.5rem,7vw,6.5rem)] uppercase leading-[0.83] tracking-[-0.035em] text-[#171715]"
+          className="font-['Bebas_Neue',Impact,sans-serif] text-[clamp(3.8rem,7.5vw,7rem)] uppercase leading-[0.88] tracking-tight text-[#1A1A1A]"
           id="hero-title"
         >
-          <span className="block">A UI/UX</span>
-          <span className="block font-[Georgia,serif] text-[0.91em] font-normal italic tracking-[-0.075em]">
-            &amp; Brand
+          <span className="block">{siteConfig.headline.line1}</span>
+          <span className="block font-serif text-[0.9em] font-normal italic tracking-tight text-[#1A1A1A]">
+            {siteConfig.headline.accent}
           </span>
-          <span className="block">Designer</span>
+          <span className="block">{siteConfig.headline.line2}</span>
         </h1>
-        <p className="mt-5 max-w-[310px] font-[Georgia,serif] text-[15px] leading-[1.35] text-[#45453f]">
-          Transforming ideas into stunning visuals—UI/UX and brand design that
-          captivates, engages, and delivers results.
+
+        <p className="mt-5 max-w-[320px] font-serif text-base sm:text-[17px] leading-relaxed text-[#45453F]">
+          {siteConfig.tagline}
         </p>
-        <a
-          className="mt-5 inline-flex min-h-11 items-center gap-4 rounded-full bg-[#171715] py-1 pl-4 pr-1 font-sans text-[10px] font-bold uppercase tracking-wide text-[#f1f0e9] no-underline transition-transform hover:scale-[1.03] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#171715]"
-          href="mailto:hello@example.com"
+
+        <div className="mt-7">
+          <PillButton to="/contact">
+            Contact Me
+          </PillButton>
+        </div>
+      </motion.div>
+
+      {/* Middle Column: Arch-masked Portrait with Interactive Mouse Parallax */}
+      <div
+        ref={cardRef}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        className="perspective-1000 order-2 mx-auto aspect-[0.82] w-full max-w-[430px] md:aspect-[0.78] md:max-w-none"
+      >
+        <motion.div
+          style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+          className="relative h-full w-full overflow-hidden mask-arch bg-[#BABCB5] shadow-md border-b-2 border-white/20"
         >
-          <span>Contact me</span>
-          <span className="grid size-9 place-items-center rounded-full bg-[#f1f0e9] text-[#171715]" aria-hidden="true">
-            <svg viewBox="0 0 20 20" className="size-4" fill="none">
-              <path d="M4 10h11m-4-4 4 4-4 4" stroke="currentColor" strokeWidth="1.6" />
-            </svg>
-          </span>
-        </a>
+          <img
+            alt={`${siteConfig.name}, a UI/UX and brand designer`}
+            className="h-full w-full object-cover object-[center_30%] transition-transform duration-700 hover:scale-105"
+            src="/images/profile.png"
+            loading="eager"
+          />
+
+          {/* Subtle gradient vignette */}
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+        </motion.div>
       </div>
 
-      <div className="relative order-2 mx-auto aspect-[0.82] w-full max-w-[450px] overflow-hidden rounded-b-[50%] bg-[#b9b9b2] md:aspect-[0.78] md:max-w-none">
-        <img
-          alt="Saad, a UI/UX and brand designer"
-          className="h-full w-full object-cover object-[center_32%]"
-          src="/images/profile.png"
-        />
-      </div>
-
-      <dl className="order-3 grid grid-cols-2 gap-x-5 gap-y-5 text-right md:grid-cols-1 md:gap-y-7">
-        {stats.map((stat) => <StatItem key={stat.label} {...stat} />)}
-      </dl>
+      {/* Right Column: Animated Stats Counters */}
+      <motion.dl
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+        className="order-3 grid grid-cols-2 gap-x-6 gap-y-6 text-left sm:text-right md:grid-cols-1 md:gap-y-8"
+      >
+        {siteConfig.stats.map((stat) => (
+          <StatCounter key={stat.label} value={stat.value} label={stat.label} />
+        ))}
+      </motion.dl>
     </section>
   )
 }
